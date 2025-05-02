@@ -1,23 +1,26 @@
+const message = document.querySelector(".message");
+const resolveMessage = document.querySelector(".resolve");
 function delayed(callback, time) {
     let executed = false;
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             callback(time);
             executed = true;
-            executed === true ? resolve("Successful execution!") : reject("Failed execution!"); 
+            executed === true ? resolve("Message successfully loaded!") : reject("Message loading failure!");
         }, time);
 
     })
 }
 
 function execute(time) {
-    console.log(`Executed in ${time} millisenconds`);
+    message.textContent = `Message loaded after ${time} milliseconds!`;
 }
 
 delayed(execute, 5000)
 .then(response => {
-    console.log(response);
-}, (err) => {
-    console.log(err);
+    resolveMessage.textContent = response;
+})
+.catch(err => {
+    resolveMessage.textContent = err;
 })
 
