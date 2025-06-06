@@ -1,8 +1,7 @@
-async function capitalWeather(countryName) {
-    const url1 = `https://restcountries.com/v3.1/name/${countryName}`;
-
+async function capitalWeather(country) {
     try {
         // fetching data about the country
+        const url1 = `https://restcountries.com/v3.1/name/${country}`;
         let response1 = await fetch(url1);
         if (!response1.ok) throw new Error("Fetch failed!");
         let countryObj = await response1.json();
@@ -17,13 +16,9 @@ async function capitalWeather(countryName) {
         let weatherObj = await response2.json();
         let currentTemperature = weatherObj.current_weather.temperature;
 
-        return {
-            countryName,
-            capital,
-            currentTemperature
-        }
+        return `Country: ${country}\nCapital: ${capital}\nTemperature: ${currentTemperature}`;
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
     }
 }
 
